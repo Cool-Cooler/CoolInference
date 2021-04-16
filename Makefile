@@ -10,11 +10,13 @@ COLOR_RED = \033[31m
 PROJECT := Simple App
 
 ## Installs a development environment
-install: deploy
+install: build deploy
+
+build:
+	docker-compose -f deployments/docker-compose.yml build
 
 ## Composes project using docker-compose
 deploy:
-	docker-compose -f deployments/docker-compose.yml build
 	docker-compose -f deployments/docker-compose.yml down -v
 	docker-compose -f deployments/docker-compose.yml up -d --force-recreate
 
