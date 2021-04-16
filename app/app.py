@@ -1,7 +1,6 @@
 #coding: utf-8
 
-from flask import Flask, render_template
-
+from flask import Flask, redirect, url_for, request
 import torch, torchvision
 
 # Setup detectron2 logger
@@ -12,7 +11,6 @@ setup_logger()
 # import some common libraries
 import numpy as np
 import os, json, cv2, random
-from google.colab.patches import cv2_imshow
 
 # import some common detectron2 utilities
 from detectron2 import model_zoo
@@ -50,7 +48,7 @@ def detect():
         return redirect(url_for('uploaded_file',
                                 filename=filename))
 
-@app.route('/uploads/<filename>')
+@app.route('/infer/<filename>')
 def uploaded_file(filename):
     PATH_TO_TEST_IMAGES_DIR = app.config['UPLOAD_FOLDER']
     TEST_IMAGE_PATH = os.path.join(PATH_TO_TEST_IMAGES_DIR, filename)
