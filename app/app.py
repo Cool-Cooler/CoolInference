@@ -73,7 +73,7 @@ def uploaded_file(filename):
         t_idx = data_set.thing_classes.index(tc)
         filt_inst = pred_inst[pred_inst.pred_classes == t_idx]
         cat_cnt = len(filt_inst)
-        if(cat_cnt > 0)
+        if cat_cnt > 0:
             show_inst.append(filt_inst)
             pred_res.append({"t_class": tc, "t_count":cat_cnt})
     pred_inst = Instances.cat(show_inst)
