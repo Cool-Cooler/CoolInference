@@ -43,7 +43,7 @@ def allowed_file(filename):
 
 @app.route("/infer", methods=['POST'])
 def detect():
-    file = request.files['file']
+    file = request.files['fimg']
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -79,9 +79,9 @@ def uploaded_file(filename):
     pred_inst = Instances.cat(show_inst)
 
     # Comment this out later
-    v = Visualizer(im[:, :, ::-1],data_set , scale=0.3)
-    out = v.draw_instance_predictions(pred_inst)
-    cv2.imwrite(PRED_IMAGE_PATH, out.get_image()[:, :, ::-1])
+    # v = Visualizer(im[:, :, ::-1],data_set , scale=0.3)
+    # out = v.draw_instance_predictions(pred_inst)
+    # cv2.imwrite(PRED_IMAGE_PATH, out.get_image()[:, :, ::-1])
     
     response = app.response_class(
         response=json.dumps({'result': pred_res}),
@@ -92,7 +92,7 @@ def uploaded_file(filename):
     return response
 
 if __name__ == '__main__':
-    app.config['UPLOAD_FOLDER'] = 'uploads/'
+    app.config['UPLOAD_FOLDER'] = '/app/imgstore/'
     app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpg', 'jpeg'])
     app.config['detectron2_cfg'] = init_setup()
     app.config['THING_CLASSES'] = ['banana', 'orange']
