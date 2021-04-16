@@ -1,6 +1,8 @@
 #coding: utf-8
 
-from flask import Flask, redirect, url_for, request, secure_filename
+from flask import Flask, redirect, url_for, request
+from werkzeug.utils import secure_filename
+
 import torch, torchvision
 
 # Setup detectron2 logger
