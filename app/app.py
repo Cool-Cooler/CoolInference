@@ -41,17 +41,7 @@ def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
 
-@app.route("/infer", methods=['POST'])
-def detect():
-    file = request.files['fimg']
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return redirect(url_for('uploaded_file',
-                                filename=filename))
-
-@app.route('/infer/<filename>')
-def uploaded_file(filename):
+def detect_object(filename):
     PATH_TO_TEST_IMAGES_DIR = app.config['UPLOAD_FOLDER']
     TEST_IMAGE_PATH = os.path.join(PATH_TO_TEST_IMAGES_DIR, filename)
     PRED_IMAGE_PATH = os.path.join(PATH_TO_TEST_IMAGES_DIR, 'pred_' + filename)
@@ -90,6 +80,15 @@ def uploaded_file(filename):
     )
 
     return response
+
+
+@app.route("/infer", methods=['POST'])
+def infer():
+    file = request.files['fimg']
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return detect_object(filename=filename)
 
 if __name__ == '__main__':
     app.config['UPLOAD_FOLDER'] = '/app/imgstore/'
