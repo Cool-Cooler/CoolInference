@@ -37,7 +37,7 @@ jobs:
           context: ./
           file: ./deployments/app/Dockerfile
           push: false
-          tag: coolinference:latest
+          tags: coolinference:latest
         
       - name: Push to ECR
         id: ecrpush
