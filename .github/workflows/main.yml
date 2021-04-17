@@ -45,7 +45,7 @@ jobs:
           access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: eu-west-1
-          image: public.ecr.aws/d0j2o5p4/coolinference:latest
+          image: coolinference:latest
 
 #       # Runs a set of commands using the runners shell
 #       - name: Run a multi-line script
