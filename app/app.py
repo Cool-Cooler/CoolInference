@@ -55,7 +55,7 @@ def detect_object(filename):
     # filterout bana and orage
     data_set = MetadataCatalog.get(cfg.DATASETS.TRAIN[0])
 
-    print(data_set.thing_classes)
+    # print(data_set.thing_classes)
     pred_inst = outputs["instances"].to("cpu")
 
     show_inst = []
@@ -100,5 +100,5 @@ if __name__ == '__main__':
     app.config['UPLOAD_FOLDER'] = '/app/imgstore/'
     app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpg', 'jpeg'])
     app.config['detectron2_cfg'] = init_setup()
-    app.config['THING_CLASSES'] = ['banana', 'orange', 'carrot', 'tomato', 'bottle']
+    app.config['THING_CLASSES'] = ['banana', 'orange', 'carrot', 'apple', 'bottle']
     app.run(debug=False,host='0.0.0.0')
