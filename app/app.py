@@ -94,5 +94,5 @@ if __name__ == '__main__':
     app.config['UPLOAD_FOLDER'] = '/app/imgstore/'
     app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpg', 'jpeg'])
     app.config['detectron2_cfg'] = init_setup()
-    app.config['THING_CLASSES'] = ['banana', 'orange']
+    app.config['THING_CLASSES'] = ['banana', 'orange', 'carrot', 'tomato', 'bottle']
     app.run(debug=False,host='0.0.0.0')

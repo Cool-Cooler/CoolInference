@@ -28,32 +28,22 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
-      # Build Image and start
-      - name: Run CoolInference
-        run: make install
 
       # Build Image
-      # - name: Build Docker Image
-      #   id: docker_build
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: ./
-      #     file: ./deployments/app/Dockerfile
-      #     push: false
-      #     tags: coolinference:latest
+      - name: Build Docker Image
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./deployments/app/Dockerfile
+          push: false
+          tags: coolinference:latest
         
-      # - name: Push to ECR
-      #   id: ecrpush
-      #   uses: jwalton/gh-ecr-push@v1
-      #   with:
-      #     access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #     secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #     region: eu-west-1
-      #     image: coolinference:latest
-
-#       # Runs a set of commands using the runners shell
-#       - name: Run a multi-line script
-#         run: |
-#           echo Add other actions to build,
-#           echo test, and deploy your project.
+      - name: Push to ECR
+        id: ecrpush
+        uses: jwalton/gh-ecr-push@v1
+        with:
+          access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: eu-west-1
+          image: coolinference:latest
