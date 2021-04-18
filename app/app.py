@@ -55,11 +55,15 @@ def detect_object(filename):
     # filterout bana and orage
     data_set = MetadataCatalog.get(cfg.DATASETS.TRAIN[0])
 
+    print(data_set.thing_classes)
     pred_inst = outputs["instances"].to("cpu")
 
     show_inst = []
     pred_res = []
     for tc in app.config['THING_CLASSES']:
+        if tc not in data_set.thing_classes:
+            print("Thing Class:"+ tc +", Not found in the training set")
+            continue
         t_idx = data_set.thing_classes.index(tc)
         filt_inst = pred_inst[pred_inst.pred_classes == t_idx]
         cat_cnt = len(filt_inst)
