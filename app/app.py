@@ -70,7 +70,9 @@ def detect_object(filename):
         if cat_cnt > 0:
             show_inst.append(filt_inst)
             pred_res.append({"t_class": tc, "t_count":cat_cnt})
-    pred_inst = Instances.cat(show_inst)
+
+    if len(show_inst) > 0:
+        pred_inst = Instances.cat(show_inst)
 
     # Comment this out later
     # v = Visualizer(im[:, :, ::-1],data_set , scale=0.3)
